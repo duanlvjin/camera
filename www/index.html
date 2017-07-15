@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="msapplication-tap-highlight" content="no"/>
+  <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
+  <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+  <style>
+    .swiper-container {
+      margin:100px auto;
+      width: 400px;
+      height: 300px;
+    }
+    div img{
+      height:100%;
+      width:100%;
+    }
+  </style>
+  <title>Hello World</title>
+</head>
+
+<body>
+  <input type="button" id="btn1" value="拍照">
+  <div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide div1" style="background:#399"></div>
+    <div class="swiper-slide div2" style="background: #939"></div>
+    <div class="swiper-slide div3" style="background: #993"></div>
+  </div>
+</div>
+<script type="text/javascript" src="cordova.js"></script>
+<script src="js/swiper-3.4.2.min.js"></script>
+<script>
+  new Swiper ('.swiper-container');
+  var oBtn=document.querySelector('#btn1');
+  var div1=document.querySelector('.div1');
+  var div2=document.querySelector('.div2');
+  var div3=document.querySelector('.div3');
+
+  oBtn.onclick=function(){
+    navigator.camera.getPicture( onSuccess, onError,options);
+    var options={
+      quality:80,
+      destinationType:0,
+      sourceType:2,
+      allowEdit:true
+    };
+    function onSuccess(imageData){
+      alert(imageData);
+      var image=new Image();
+      image.src=imageData;
+      image.width=100;
+      div1.appendChild(image);
+    }
+    function onError(message){
+      alert('Failed because:'+message);
+    }
+  }
+
+
+</script>
+</body>
+
+</html>
